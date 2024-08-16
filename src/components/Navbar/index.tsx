@@ -6,18 +6,30 @@ const Navbar = ({ handleMiniAppChange }: any) => {
   const [nav, setNav] = useState(false);
 
   // Toggle function to handle the navbar's display
+
+  const handleNavClick = (id: number) => {
+    handleMiniAppChange(id);
+    setNav(false);
+  };
+
   const handleNav = () => {
     setNav(!nav);
   };
 
   // Array containing navigation items
-  const navItems = [{ id: 1, text: 'Notes' }];
+  const navItems = [
+    { id: 1, text: 'Notes' },
+    { id: 2, text: 'Stopwatch' },
+  ];
 
   return (
-    <div className='bg-slate-900 flex justify-between items-center h-24 mx-auto px-4 text-white'>
+    <div className='bg-slate-900 flex justify-between items-center h-16 mx-auto px-2 text-white'>
       {/* Logo */}
-      <h1 className='w-full text-3xl font-bold text-slate-200'>
-        Mini Apps by Aniq
+      <h1
+        className='w-full text-2xl text-slate-200 hover:cursor-pointer'
+        onClick={() => handleMiniAppChange(0)}
+      >
+        MiniAppsbyAniq
       </h1>
 
       {/* Desktop Navigation */}
@@ -42,18 +54,24 @@ const Navbar = ({ handleMiniAppChange }: any) => {
       <ul
         className={
           nav
-            ? 'fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500'
+            ? 'fixed md:hidden z-50 left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500'
             : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
         }
       >
         {/* Mobile Logo */}
-        <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>REACT.</h1>
+        <h1
+          className='w-full text-xl text-slate-200 m-4'
+          onClick={() => handleMiniAppChange(0)}
+        >
+          MiniAppsByAniq
+        </h1>
 
         {/* Mobile Navigation Items */}
         {navItems.map((item) => (
           <li
             key={item.id}
-            className='p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600'
+            onClick={() => handleNavClick(item.id)}
+            className='p-4 border-b rounded-xl hover:bg-slate-300 duration-300 hover:text-black cursor-pointer border-gray-600'
           >
             {item.text}
           </li>
