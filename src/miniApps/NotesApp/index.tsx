@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import toast from 'react-hot-toast';
+
+// icons
 import { MdAdd, MdSave } from 'react-icons/md';
 import { CiBatteryEmpty } from 'react-icons/ci';
-
-import toast, { Toaster } from 'react-hot-toast';
 
 import Note from '../../components/NoteApp/Note';
 
@@ -107,7 +108,6 @@ const NotesApp = () => {
 
   return (
     <div className='m-10'>
-      <Toaster />
       <div className='flex py-10 justify-start'>
         <p className='text-3xl text-slate-900 mr-5'>Notes</p>
         <div className='flex justify-between w-full'>

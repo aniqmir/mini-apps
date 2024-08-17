@@ -20,6 +20,7 @@ const Navbar = ({ handleMiniAppChange }: any) => {
   const navItems = [
     { id: 1, text: 'Notes' },
     { id: 2, text: 'Stopwatch' },
+    { id: 3, text: 'Images' },
   ];
 
   return (
