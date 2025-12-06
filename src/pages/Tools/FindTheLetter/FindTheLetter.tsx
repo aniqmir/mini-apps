@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
-import { CiVolumeHigh } from "react-icons/ci";
+import { CiVolumeHigh, CiRepeat } from "react-icons/ci";
 
 import BgImage from './images/bg-image-alphabet.svg'
 
@@ -7,9 +7,9 @@ const alphabets: string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 // Generate playful, bright color for children
 const getRandomPlayfulColor = (): string => {
-  const hue = Math.floor(Math.random() * 360);       
-  const saturation = Math.floor(Math.random() * 30) + 70; 
-  const lightness = Math.floor(Math.random() * 20) + 50;  
+  const hue = Math.floor(Math.random() * 360);
+  const saturation = Math.floor(Math.random() * 30) + 70;
+  const lightness = Math.floor(Math.random() * 20) + 50;
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 
@@ -73,6 +73,11 @@ export default function AlphabetGame() {
     }
   };
 
+  const resetTheGame = () => {
+    if (currentIndex === 0) return;
+    setCurrentIndex(0)
+  }
+
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-4"
@@ -83,13 +88,13 @@ export default function AlphabetGame() {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <h2 className="text-4xl font-bold text-indigo-600 mb-8 text-center drop-shadow-md">
+      <h2 className="text-4xl font-bold text-indigo-600 mb-4 text-center drop-shadow-md">
         Alphabet Identification Game
       </h2>
 
       {/* Letter display */}
       <div
-      key={currentLetter}
+        key={currentLetter}
         className="text-[150px] font-extrabold drop-shadow-lg mb-6 transition-colors duration-500 animate-bounce"
         style={{ color: letterColor }}
       >
@@ -99,7 +104,7 @@ export default function AlphabetGame() {
       {/* Sound button */}
       <button
         onClick={() => playSound(currentLetter)}
-        className="mb-8 p-3 bg-indigo-100 rounded-full shadow hover:bg-indigo-200 transition"
+        className="mb-4 p-3 bg-indigo-100 rounded-full shadow hover:bg-indigo-200 transition"
       >
         <CiVolumeHigh size={32} className="text-indigo-600" />
       </button>
@@ -113,6 +118,7 @@ export default function AlphabetGame() {
           onChange={(e) => setInputValue(e.target.value)}
           className="text-4xl text-center w-24 h-24 border-2 border-indigo-300 rounded-xl shadow focus:ring-2 focus:ring-indigo-500 outline-none"
         />
+
 
         <button
           type="submit"
@@ -133,6 +139,13 @@ export default function AlphabetGame() {
       <p className="mt-8 text-lg text-black-300">
         Progress: <span className="font-semibold">{currentIndex + 1}</span> / 26
       </p>
+
+      <button
+        onClick={resetTheGame}
+        className="my-8 p-3 bg-indigo-100 rounded-full shadow hover:bg-indigo-200 transition"
+      >
+        <CiRepeat size={32} className="text-indigo-600" />
+      </button>
     </div>
   );
 }
